@@ -99,17 +99,20 @@ class SortingRobot:
         Sort the robot's list.
         """
         while self.light_is_on() == False:
-            self.swap_item()
             # print("CURRENT LIST", self._list, "HELD ITEM",
-            #   self._item, "compared item", self._list[self._position],  "LIGHT STATE", self._light)
+                #   self._item, "compared item", self._list[self._position],  "LIGHT STATE", self._light)
             if self.can_move_right() == True:
+                self.swap_item()
                 self.move_right()
-                if self.compare_item() == False and self.can_move_right == False:
-                    self.swap_item()
+                if self.compare_item() == True and self.can_move_right == False:
+                    # self.swap_item()
+                    self.can_move_left()
                 elif self.compare_item() == True:
                     self.swap_item()
                 elif self.can_move_right() == False and self.compare_item() == None:
-                    print("CADI", self._list)
+                    print("CADI", self._list, 'cur item', self._item, 'compared item',
+                          self._list[self._position], 'cur pos', self._position)
+
             else:
                 while self.can_move_left():
                     # print("CURR POSITION", self._position)
@@ -117,6 +120,9 @@ class SortingRobot:
                     if self.can_move_left() == False:
                         self.swap_item()
                         self.move_right()
+                        # print("FIXED LIST", self._list, 'cur item', self._item,
+                        #       'checked item', self._list[self._position])
+                    # if
                         break
 
 
